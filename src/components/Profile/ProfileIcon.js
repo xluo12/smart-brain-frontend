@@ -12,7 +12,7 @@ class ProfileIcon extends Component {
 
     toggle = () => {
         this.setState(prevState => ({
-          dropdownOpen: !prevState.dropdownOpen
+            dropdownOpen: !prevState.dropdownOpen
         }));
     }
 
@@ -20,15 +20,21 @@ class ProfileIcon extends Component {
         return (
             <div className="pa4 tc">
                 <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-                    <DropdownToggle caret>Dropdown</DropdownToggle>
-                    <DropdownMenu>
-                        <DropdownItem>View Profile</DropdownItem>
-                        <DropdownItem>Signout</DropdownItem>
+                    <DropdownToggle
+                        tag="span"
+                        data-toggle="dropdown"
+                        aria-expanded={this.state.dropdownOpen}
+                    >
+                    <img src="http://tachyons.io/img/logo.jpg" className="br-100 ba h3 w3 dib" alt="avatar" />
+                    </DropdownToggle>
+                    <DropdownMenu className='b--transparent shadow-5' 
+                                  style={{position: 'static', backgroundColor: 'rgba(255, 255, 255, 0.5)'}}
+                                   >
+                        <DropdownItem onClick={this.props.toggleModal}>View Profile</DropdownItem>
+                        <DropdownItem onClick={() => this.props.onRouteChange('signout')}>Sign Out</DropdownItem>
                     </DropdownMenu>
                 </Dropdown>
-                <div class="pa4 tc">
-                    <img src="http://tachyons.io/img/logo.jpg" class="br-100 ba h3 w3 dib" alt="avatar" />
-                </div>
+                
             </div >
         )
     }
