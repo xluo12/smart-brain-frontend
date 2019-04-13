@@ -12,7 +12,6 @@ class Register extends React.Component {
 
   saveAuthTokenInSession = (token) => {
     window.sessionStorage.setItem('token', token);
-    console.log("saved token to window")
   }
 
   onNameChange = (event) => {
@@ -39,10 +38,10 @@ class Register extends React.Component {
     })
       .then(response => response.json())
       .then(reply => {
-        console.log("received reply");
         if (reply.user) {
-          console.log("reply.usr: ", reply.user);
-          this.saveAuthTokenInSession(reply.session.token);
+          if (reply.session && reply.session.token) {
+            this.saveAuthTokenInSession(reply.session.token);
+          }
           this.props.loadUser(reply.user);
           this.props.onRouteChange('home');
         }
