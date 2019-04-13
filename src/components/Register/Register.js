@@ -10,6 +10,11 @@ class Register extends React.Component {
     }
   }
 
+  saveAuthTokenInSession = (token) => {
+    window.sessionStorage.setItem('token', token);
+    console.log("saved token to window")
+  }
+
   onNameChange = (event) => {
     this.setState({name: event.target.value})
   }
@@ -22,7 +27,7 @@ class Register extends React.Component {
     this.setState({password: event.target.value})
   }
 
-  onSubmitSignIn = () => {
+  onSubmitRegister = () => {
     fetch('http://localhost:3000/register', {
       method: 'post',
       headers: {'Content-Type': 'application/json'},
@@ -33,9 +38,12 @@ class Register extends React.Component {
       })
     })
       .then(response => response.json())
-      .then(user => {
-        if (user.id) {
-          this.props.loadUser(user)
+      .then(reply => {
+        console.log("received reply");
+        if (reply.user) {
+          console.log("reply.usr: ", reply.user);
+          this.saveAuthTokenInSession(reply.session.token);
+          this.props.loadUser(reply.user);
           this.props.onRouteChange('home');
         }
       })
@@ -81,7 +89,7 @@ class Register extends React.Component {
             </fieldset>
             <div className="">
               <input
-                onClick={this.onSubmitSignIn}
+                onClick={this.onSubmitRegister}
                 className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
                 type="submit"
                 value="Register"
