@@ -34,7 +34,7 @@ class Signin extends React.Component {
       .then(response => response.json())
       .then(data => {
         if (data.userId && data.success === 'true') {
-          this.saveAuthTokenInSession(data.token)
+          this.saveAuthTokenInSession(data.token)      // save cookie
           fetch(`http://localhost:3000/profile/${data.userId}`, {
             method: 'get',
             headers: {
