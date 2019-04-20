@@ -46,7 +46,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const token = window.sessionStorage.getItem('token');
+    const token = window.localStorage.getItem('token');
     if (token) {
       fetch('http://localhost:3000/signin', {
         method: 'post',
@@ -122,7 +122,7 @@ class App extends Component {
     fetch('http://localhost:3000/imageurl', {
       method: 'post',
       headers: { 'Content-Type': 'application/json',
-                 'Authorization': window.sessionStorage.getItem('token')
+                 'Authorization': window.localStorage.getItem('token')
                 },
       body: JSON.stringify({
         input: this.state.input
@@ -134,7 +134,7 @@ class App extends Component {
           fetch('http://localhost:3000/image', {
             method: 'put',
             headers: { 'Content-Type': 'application/json',
-                       'Authorization': window.sessionStorage.getItem('token')
+                       'Authorization': window.localStorage.getItem('token')
                      },
             body: JSON.stringify({
               id: this.state.user.id
@@ -154,9 +154,9 @@ class App extends Component {
 
   onRouteChange = (route) => {
     if (route === 'signout') {
-      const token = window.sessionStorage.getItem('token');
+      const token = window.localStorage.getItem('token');
       if (token) {
-        window.sessionStorage.removeItem('token');
+        window.localStorage.removeItem('token');
       }
       return this.setState(initialState)
     } else if (route === 'home') {

@@ -11,7 +11,7 @@ class Register extends React.Component {
   }
 
   saveAuthTokenInSession = (token) => {
-    window.sessionStorage.setItem('token', token);
+    window.localStorage.setItem('token', token);
   }
 
   onNameChange = (event) => {
