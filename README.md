@@ -1,4 +1,4 @@
-# SmartBrain
+# SmartBrain https://smart-brain-frontend12.herokuapp.com/
 
 1. Clone this repo
 2. Run `npm install`
